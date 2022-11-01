@@ -1,0 +1,277 @@
+@use "./helper/_viropels.scss" as *;
+
+$status: false;
+$stat: 1;
+
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+.container {
+    padding: 20px;
+    background-color: #EEE;
+    header {
+        display: flex;
+        justify-content: space-between;
+    }
+    hr {
+        height: 1px;
+        background-color: #ccc;
+        border: none;
+    }
+    .body {
+        display: flex;
+        justify-content: space-around;
+        margin: {
+            top: 20px;
+            bottom: 20px
+        };
+        .hangman {
+            position: relative;
+            width: 150px;
+            &.checkd-1 .drow {
+                display: block;
+            }
+            &.checkd-2 .drow::before {
+                display: block;
+            }
+            &.checkd-3 .drow::after {
+                display: block;
+            }
+            &.checkd-4 .drow .stand {
+                display: block;
+            }
+            &.checkd-5 .bod {
+                display: block;
+            }
+            &.checkd-6 .bod::before {
+                display: block;
+            }
+            &.checkd-7 .bod .hands {
+                display: block;
+            }
+            &.checkd-8 .bod .legs {
+                display: block;
+            }
+            
+            
+            .drow {
+                position: relative;
+                border: {
+                    bottom: $heigt-draw solid $color-draw;
+                };
+                width: 50px;
+                height: 250px;
+                display: none;
+                &::before {
+                    content: "";
+                    position: absolute;
+                    height: 250px;
+                    width: $heigt-draw;
+                    bottom: 0;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: {
+                        color: $color-draw;
+                    };
+                    display: none;
+                }
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: 10px;
+                    right: -73px;
+                    width: 100px;
+                    height: $heigt-draw;
+                    background: {
+                        color: $color-draw;
+                    };
+                    display: none;
+                }
+                .stand {
+                    position: absolute;
+                    right: -73px;
+                    top: 10px;
+                    height: 45px;
+                    background: {
+                        color: $color-draw;
+                    };
+                    width: $heigt-draw;
+                    display: none;
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        width: 60px;
+                        height: 60px;
+                        top: 45px;
+                        right: -30px;
+                        border: {
+                            width: $heigt-draw;
+                            style: dashed;
+                            color: $color-draw;
+                            radius: 50%;
+                        }
+                    }
+                }
+            }
+            .bod {
+                position: absolute;
+                right: 6px;
+                top: 64px;
+                width: 50px;
+                height: 50px;
+                border: {
+                    style: solid;
+                    width: $heigt-draw;
+                    color: $color-draw;
+                    radius: 50%;
+                };
+                display: none;
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 45px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: {
+                        color: $color-draw;
+                    };
+                    width: $heigt-draw;
+                    height: 100px;
+                    display: none;
+                }
+                .hands {
+                    position: absolute;
+                    top: 55px;
+                    right: 50%;
+                    transform: translateX(-50%);
+                    display: none;
+                    &::before,
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        height: 50px;
+                        width: $heigt-draw;
+                        background: {
+                            color: $color-draw;
+                        };
+                    }
+                    &::after {
+                        right: 18px;
+                        transform: rotate(300deg);
+                    }
+                    &::before {
+                        right: -22px;
+                        transform: rotate(60deg);
+                    }
+                }
+                .legs {
+                    position: absolute;
+                    bottom: -92px;
+                    right: 50%;
+                    transform: translateX(-50%);
+                    display: none;
+                    &::before, 
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        height: 50px;
+                        width: $heigt-draw;
+                        background: {
+                            color: $color-draw;
+                        };
+                    }
+                    &::after {
+                        right: 16px;
+                        transform: rotate(225deg);
+                    }
+                    &::before {
+                        right: -20px;
+                        transform: rotate(135deg);
+                    }
+                }
+            }
+        }
+        .latters {
+            display: flex;
+            flex-wrap: wrap;
+            width: 415px;
+            &.end {
+                .letter {
+                    pointer-events: none;
+                    opacity: .5;
+                }
+            }
+            .letter {
+                width: 48px;
+                height: 48px;
+                text-align: center;
+                margin: 5px;
+                padding: 3px;
+                font-size: 35px;
+                font-weight: bold;
+                cursor: pointer;
+                background-color: #009688;
+                border-radius: 5px;
+                transition: 0.3s;
+                &:hover {
+                    box-shadow: 0 2px 15px 0 rgb(0 0 0 / 45%);
+                    background-color: #009688ab;
+                }
+                &.cliced {
+                    pointer-events: none;
+                    opacity: .5;
+                }
+            }
+        }
+    }
+    .result {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        div {
+            width: 48px;
+            height: 45px;
+            border-bottom: 3px solid #222;
+            margin: 10px;
+            text-align: center;
+            font-size: 30px;
+            font-weight: 800;
+            &.space {
+                position: relative;
+                top: -20px;
+                width: 30px;
+            }
+        }
+    }
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0 0 0 / 45%);
+}
+.bopp {
+    position: fixed;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #222;
+    font-size: 50px;
+    text-align: center;
+    border-radius: 8px;
+    padding: 17px;
+    color: white;
+    font-weight: bold;
+    &.good {
+        color: green;
+    }
+    &.bad {
+        color: red;
+    }
+}

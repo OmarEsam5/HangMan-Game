@@ -1,0 +1,250 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  padding: 20px;
+  background-color: #EEE;
+}
+.container header {
+  display: flex;
+  justify-content: space-between;
+}
+.container hr {
+  height: 1px;
+  background-color: #ccc;
+  border: none;
+}
+.container .body {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.container .body .hangman {
+  position: relative;
+  width: 150px;
+}
+.container .body .hangman.checkd-1 .drow {
+  display: block;
+}
+.container .body .hangman.checkd-2 .drow::before {
+  display: block;
+}
+.container .body .hangman.checkd-3 .drow::after {
+  display: block;
+}
+.container .body .hangman.checkd-4 .drow .stand {
+  display: block;
+}
+.container .body .hangman.checkd-5 .bod {
+  display: block;
+}
+.container .body .hangman.checkd-6 .bod::before {
+  display: block;
+}
+.container .body .hangman.checkd-7 .bod .hands {
+  display: block;
+}
+.container .body .hangman.checkd-8 .bod .legs {
+  display: block;
+}
+.container .body .hangman .drow {
+  position: relative;
+  border-bottom: 4px solid #222;
+  width: 50px;
+  height: 250px;
+  display: none;
+}
+.container .body .hangman .drow::before {
+  content: "";
+  position: absolute;
+  height: 250px;
+  width: 4px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #222;
+  display: none;
+}
+.container .body .hangman .drow::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: -73px;
+  width: 100px;
+  height: 4px;
+  background-color: #222;
+  display: none;
+}
+.container .body .hangman .drow .stand {
+  position: absolute;
+  right: -73px;
+  top: 10px;
+  height: 45px;
+  background-color: #222;
+  width: 4px;
+  display: none;
+}
+.container .body .hangman .drow .stand::before {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  top: 45px;
+  right: -30px;
+  border-width: 4px;
+  border-style: dashed;
+  border-color: #222;
+  border-radius: 50%;
+}
+.container .body .hangman .bod {
+  position: absolute;
+  right: 6px;
+  top: 64px;
+  width: 50px;
+  height: 50px;
+  border-style: solid;
+  border-width: 4px;
+  border-color: #222;
+  border-radius: 50%;
+  display: none;
+}
+.container .body .hangman .bod::before {
+  content: "";
+  position: absolute;
+  top: 45px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #222;
+  width: 4px;
+  height: 100px;
+  display: none;
+}
+.container .body .hangman .bod .hands {
+  position: absolute;
+  top: 55px;
+  right: 50%;
+  transform: translateX(-50%);
+  display: none;
+}
+.container .body .hangman .bod .hands::before, .container .body .hangman .bod .hands::after {
+  content: "";
+  position: absolute;
+  height: 50px;
+  width: 4px;
+  background-color: #222;
+}
+.container .body .hangman .bod .hands::after {
+  right: 18px;
+  transform: rotate(300deg);
+}
+.container .body .hangman .bod .hands::before {
+  right: -22px;
+  transform: rotate(60deg);
+}
+.container .body .hangman .bod .legs {
+  position: absolute;
+  bottom: -92px;
+  right: 50%;
+  transform: translateX(-50%);
+  display: none;
+}
+.container .body .hangman .bod .legs::before, .container .body .hangman .bod .legs::after {
+  content: "";
+  position: absolute;
+  height: 50px;
+  width: 4px;
+  background-color: #222;
+}
+.container .body .hangman .bod .legs::after {
+  right: 16px;
+  transform: rotate(225deg);
+}
+.container .body .hangman .bod .legs::before {
+  right: -20px;
+  transform: rotate(135deg);
+}
+.container .body .latters {
+  display: flex;
+  flex-wrap: wrap;
+  width: 415px;
+}
+.container .body .latters.end .letter {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.container .body .latters .letter {
+  width: 48px;
+  height: 48px;
+  text-align: center;
+  margin: 5px;
+  padding: 3px;
+  font-size: 35px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #009688;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+.container .body .latters .letter:hover {
+  box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.45);
+  background-color: rgba(0, 150, 136, 0.6705882353);
+}
+.container .body .latters .letter.cliced {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.container .result {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.container .result div {
+  width: 48px;
+  height: 45px;
+  border-bottom: 3px solid #222;
+  margin: 10px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 800;
+}
+.container .result div.space {
+  position: relative;
+  top: -20px;
+  width: 30px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.45);
+}
+
+.bopp {
+  position: fixed;
+  z-index: 100;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #222;
+  font-size: 50px;
+  text-align: center;
+  border-radius: 8px;
+  padding: 17px;
+  color: white;
+  font-weight: bold;
+}
+.bopp.good {
+  color: green;
+}
+.bopp.bad {
+  color: red;
+}/*# sourceMappingURL=styling.css.map */
